@@ -17,7 +17,10 @@ namespace SimpleEmployeeInformationSystem.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            return View(db.Employees.ToList());
+            List<Employee> aEmployeeList= db.Employees.ToList();
+            ViewBag.TotalEmployee = aEmployeeList.Count.ToString();
+            ViewBag.TotalAmount = aEmployeeList.Sum(a=>a.SalaryAmount).ToString();
+            return View(aEmployeeList);
         }
 
         // GET: Employees/Details/5
