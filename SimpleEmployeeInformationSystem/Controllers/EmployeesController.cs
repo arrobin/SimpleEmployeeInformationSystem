@@ -53,6 +53,16 @@ namespace SimpleEmployeeInformationSystem.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (db.Employees.ToList().Exists(a=>a.EmployeeId==employee.EmployeeId))
+                {
+                    ViewBag.IdExist = "This ID Already Exist!!!";
+                    return View();
+                }
+                if (db.Employees.ToList().Exists(a => a.Email == employee.Email))
+                {
+                    ViewBag.EmailExist = "This Email Already Exist!!!";
+                    return View();
+                }
                 db.Employees.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
